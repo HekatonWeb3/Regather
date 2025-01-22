@@ -1,11 +1,14 @@
+import "./Button.css"
+
 interface ButtonProps {
   children: React.ReactNode
+  onclick?: () => void
 }
 
-export default function Button ({children}: ButtonProps) {
+export function Button ({children, onclick}: ButtonProps) {
   return (
-    <button className="bg-slate-600 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded">
-    {children}
+    <button onClick={onclick} className=" text-white font-semibold py-2 px-4 rounded-md btn-gradient">
+    <span>{children}</span>
     </button>
   )
 }
