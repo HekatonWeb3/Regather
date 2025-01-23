@@ -6,6 +6,10 @@
   text-align: center;
 } */
 
+.gradient-border {
+  border-image: linear-gradient(96deg, #6FE7F7 -11.73%, #F87EF8 108.7%) 1;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
