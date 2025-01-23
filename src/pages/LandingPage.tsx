@@ -25,7 +25,7 @@ export default function LandingPage() {
         <article className="flex flex-col md:gap-4 my-auto order-3 md:order-1">
           <h1 className="__text-gradient font-semibold text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-transparent leading-normal bg-clip-text">Empowering Stories with Decentralized Collaboration</h1>
           <p className="text-dark-400 text-xs md:text-base lg:text-xl">Write your story, refine the plot, and let the community decide what comes next.</p>
-          <ul className="flex gap-4 mt-8">
+          <ul className="flex gap-4 mt-4 md:mt-8">
             <Button>Explore Stories</Button>
             <ButtonSecondary>Start your story</ButtonSecondary>
           </ul>
