@@ -41,9 +41,9 @@ export default function LandingPage() {
         <ul className="flex flex-col gap-8 md:grid grid-cols-3 md:gap-16 xl:gap-36">
           {content.map((X, index) => (
             <figure key={index} className="flex flex-col items-center justify-between gap-4 bg-light-100 shadow-custom-light p-8 rounded-xl">
-              <img src={X.image} className="aspect-auto h-32 md:h-40 w-fit" alt="" />
+              <img src={X.image} className="aspect-auto h-28 md:h-40 w-fit" alt="" />
               <div className="flex flex-col items-center text-center gap-2 md:gap-4">
-                <h2 className="font-semibold text-xl md:text-2xl">{X.title}</h2>
+                <h2 className="font-medium text-lg md:text-2xl">{X.title}</h2>
                 <p className="text-dark-300 text-sm">{X.desc}</p>
               </div>
             </figure>
