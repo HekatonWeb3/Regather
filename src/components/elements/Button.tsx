@@ -9,7 +9,7 @@ export function Button({ children, onclick }: ButtonProps) {
   return (
     <button
       onClick={onclick}
-      className="text-white font-semibold py-2 px-4 rounded-md btn-gradient text-xs md:text-base">
+      className="text-white border border-white font-semibold py-2 px-4 rounded-md btn-gradient text-xs md:text-base">
       <span>{children}</span>
     </button>
   )
