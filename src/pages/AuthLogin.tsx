@@ -1,67 +1,71 @@
-import { useState } from 'react';
-import { Actor, HttpAgent } from '@dfinity/agent';
-import { idlFactory as StoryManagerIdl } from '../declarations/backend';
-import { AuthClient } from '@dfinity/auth-client'; // Import Internet Identity client
+import React, { useState } from "react";
+import { AuthClient } from "@dfinity/auth-client";
+import { useNavigate } from "react-router";
 
-const agent = new HttpAgent({
-  host: 'http://127.0.0.1:3000/'
-});
-await agent.fetchRootKey();
-
-const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
+const ConnectICPPage = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [principal, setPrincipal] = useState("");
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate(); // Hook untuk navigasi
 
   const handleLogin = async () => {
-    setLoading(true);
-    setMessage("");
+    const authClient = await AuthClient.create();
 
-    try {
-      const authClient = await AuthClient.create(); // Create an AuthClient instance
-      const identity = await authClient.login(); // Use Internet Identity to log in
+    await authClient.login({
+      identityProvider: "https://identity.ic0.app/#authorize",
+      onSuccess: async () => {
+        setIsAuthenticated(true);
+        const identity = authClient.getIdentity();
+        setPrincipal(identity.getPrincipal().toText());
+        setMessage("Hello, authenticated user!");
 
-      // Create an actor instance for StoryManager canister
-      const storyManagerActor = Actor.createActor(
-        StoryManagerIdl,
-        {
-          agent: agent,
-          canisterId: 'be2us-64aaa-aaaaa-qaabq-cai',
-        }
-      );
+        // Navigasi ke HomePage setelah berhasil login
+        navigate("/home");
+      },
+      onError: () => {
+        setMessage("Failed to authenticate. Please try again.");
+      },
+    });
+  };
 
-      // Call the backend login function
-      const result = await storyManagerActor.login() as any; // Call the login method without parameters
-      setMessage(result);
-    } catch (error: unknown) {
-      console.error("Error in login:", error);
-      if (error instanceof Error) {
-        setMessage('Error logging in: ' + error.message);
-      } else {
-        setMessage('An unknown error occurred');
-      }
-    } finally {
-      setLoading(false);
-    }
+  const handleLogout = async () => {
+    const authClient = await AuthClient.create();
+    await authClient.logout();
+    setIsAuthenticated(false);
+    setPrincipal("");
+    setMessage("You have been logged out.");
   };
 
   return (
-    <div className="login-page">
-      <h1>Login to Web Novel Platform</h1>
-      <div>
-        <input
-          type="text"
-          placeholder="Enter your username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white p-6 rounded-2xl shadow-lg max-w-md w-full">
+        <h1 className="text-2xl font-bold mb-4">Connect to ICP</h1>
+        {!isAuthenticated ? (
+          <>
+            <p className="mb-4 text-gray-600">Log in to connect to the Internet Computer.</p>
+            <button
+              onClick={handleLogin}
+              className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700 transition"
+            >
+              Connect
+            </button>
+          </>
+        ) : (
+          <>
+            <p className="mb-4 text-gray-600">Welcome, authenticated user!</p>
+            <p className="mb-4 font-mono text-sm text-gray-800">Principal: {principal}</p>
+            <p className="mb-4 text-green-600">{message}</p>
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 text-white py-2 px-4 rounded-xl hover:bg-red-700 transition"
+            >
+              Logout
+            </button>
+          </>
+        )}
       </div>
-      <button onClick={handleLogin} disabled={loading}>
-        {loading ? 'Logging in...' : 'Login'}
-      </button>
-      {message && <p>{message}</p>}
     </div>
   );
 };
 
-export default LoginPage;
+export default ConnectICPPage;
