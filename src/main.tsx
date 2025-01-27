@@ -6,6 +6,7 @@ import './index.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layouts from './components/layouts/Layouts';
 import LandingPage from './pages/LandingPage';
+import HomePage from './pages/Homepage';
 
 const router = createBrowserRouter([{
   element: <Layouts />,
@@ -13,6 +14,10 @@ const router = createBrowserRouter([{
     {
       path: '/',
       element: <LandingPage />,
+    },
+    {
+      path: "/home",
+      element: <HomePage/>
     }
   ]
 }])
