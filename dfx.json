@@ -3,14 +3,33 @@
     "backend": {
       "type": "motoko",
       "main": "backend/Backend.mo",
+      "dependencies": [
+        "internet_identity"
+      ],
       "declarations": {
         "node_compatibility": true
       }
     },
+    "internet_identity": {
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "frontend": {},
+      "remote": {
+        "id": {
+          "ic": "bd3sg-teaaa-aaaaa-qaaba-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz"
+    },
     "frontend": {
-      "dependencies": ["backend"],
+      "dependencies": [
+        "backend",
+        "internet_identity"
+      ],
       "type": "assets",
-      "source": ["dist/"]
+      "source": [
+        "dist/"
+      ]
     }
   },
   "defaults": {
