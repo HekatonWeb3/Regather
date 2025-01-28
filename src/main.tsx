@@ -8,6 +8,7 @@ import Layouts from './components/layouts/Layouts';
 import LandingPage from './pages/LandingPage';
 import HomePage from './pages/Homepage';
 import AuthLogin from './pages/AuthLogin';
+import App from './App';
 
 const router = createBrowserRouter([{
   element: <Layouts />,
@@ -28,10 +29,11 @@ const router = createBrowserRouter([{
 }])
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  
   <React.StrictMode>
     <AgentProvider withProcessEnv>
       <ActorProvider idlFactory={idlFactory} canisterId={canisterId}>
-        <RouterProvider router={router} />
+        <App/>
       </ActorProvider>
     </AgentProvider>
   </React.StrictMode>,
