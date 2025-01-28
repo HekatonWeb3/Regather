@@ -1,5 +1,7 @@
+import { Navigate, useNavigate } from "react-router";
 import { Button, ButtonSecondary } from "../components/elements/Button";
 import "./LandingPage.css"
+import { useEffect } from "react";
 const content = [
   {
     title: " Write & Share",
@@ -17,8 +19,14 @@ const content = [
     image: "/images/brain.png"
   }
 ]
-
 export default function LandingPage() {
+  const navigate = useNavigate();
+  const handleLogin = async () => {
+    navigate("/login")
+  }
+  useEffect(() => {
+    document.title = "Regather | Create Your Own Novel";
+  }, [])
   return (
     <main className="px-4 xl:px-24 relative text-dark-100">
       <section className="flex flex-col md:grid md:grid-cols-2 mt-8 md:mt-16 z-10">
@@ -26,8 +34,8 @@ export default function LandingPage() {
           <h1 className="__text-gradient font-semibold text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-transparent leading-normal bg-clip-text">Empowering Stories with Decentralized Collaboration</h1>
           <p className="text-dark-400 text-xs md:text-base lg:text-xl">Write your story, refine the plot, and let the community decide what comes next.</p>
           <ul className="flex gap-4 mt-4 md:mt-8">
-            <Button>Explore Stories</Button>
-            <ButtonSecondary>Start your story</ButtonSecondary>
+            <Button onclick={handleLogin}>Explore Stories</Button>
+            <ButtonSecondary onclick={handleLogin}>Start your story</ButtonSecondary>
           </ul>
         </article>
 

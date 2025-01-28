@@ -1,6 +1,11 @@
 import { Link } from "react-router";
+import { useAuth } from "../hooks/useAuth";
+import { useEffect } from "react";
 
 export default function HomePage() {
+  useEffect(() => {
+    document.title = "Home | Welcome User!";
+  }, [])
   return (
     <>
       <main className="px-24 space-y-16 mt-8">
@@ -12,7 +17,7 @@ export default function HomePage() {
             <figure className="relative overflow-hidden rounded-md">
               <img src="/images/heartless.jpg" className="" alt="" />
               <div className="w-full h-full flex top-0 absolute transition-all group-hover:opacity-100 opacity-0 bg-magentas-100/50">
-               <h1 className="text-white font-medium m-auto text-lg">Lihat</h1>
+                <h1 className="text-white font-medium m-auto text-lg">Lihat</h1>
               </div>
             </figure>
 
@@ -32,11 +37,11 @@ export default function HomePage() {
             <h2>Most Popular Novel</h2>
 
             <main className="flex gap-4 hover:bg-magentas-100/20 transition-all">
-                <h1 className="my-auto bg-amber-500 p-2 text-sm">1</h1>
+              <h1 className="my-auto bg-amber-500 p-2 text-sm">1</h1>
               <figure className="flex gap-4 items-center">
                 <img src="/images/heartless.jpg" className="h-16" alt="" />
               </figure>
-              <article> 
+              <article>
                 <h1 className="text-base font-medium">Heartless</h1>
                 <div>
 
