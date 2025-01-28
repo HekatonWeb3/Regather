@@ -1,4 +1,3 @@
-
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -7,7 +6,7 @@
 } */
 
 .gradient-border {
-  border-image: linear-gradient(96deg, #6FE7F7 -11.73%, #F87EF8 108.7%) 1;
+  border-image: linear-gradient(96deg, #6fe7f7 -11.73%, #f87ef8 108.7%) 1;
 }
 
 .logo {
@@ -31,47 +30,16 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .logo.react {
-    animation: logo-spin infinite 60s linear;
-  }
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
-
-.logo.motoko:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
-
-.logo-stack {
-  display: inline-grid;
-}
-
-.logo-stack > * {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-@keyframes logo-swim {
-  from {
-    transform: rotate(4deg) translateY(0);
-  }
-  50% {
-    transform: rotate(-5deg) translateY(0);
-  }
-  to {
-    transform: rotate(4deg) translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .logo.motoko {
-    animation: logo-swim 5s ease-in-out infinite;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f199f4 0%, #6fe7f7 100%);
+  border-radius: 32px;
+  border: 2px solid #ffffff;
 }
